@@ -28,39 +28,3 @@
     </table>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
-
-interface Task {
-  id: string
-  text: string
-  completed: boolean
-}
-
-export default defineComponent({
-  name: 'TodoList',
-  data() {
-    return {
-      newTask: '',
-      tasks: [] as Task[]
-    }
-  },
-  methods: {
-    addTask() {
-      if (this.newTask.trim() !== '') {
-        const task: Task = {
-          id: uuidv4(),
-          text: this.newTask.trim(),
-          completed: false
-        }
-        this.tasks.push(task)
-        this.newTask = ''
-      }
-    },
-    markTaskCompleted(task: Task) {
-      task.completed = !task.completed
-    }
-  }
-})
-</script>
