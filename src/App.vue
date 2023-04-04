@@ -60,8 +60,9 @@ export default defineComponent({
       }
     },
     markTaskCompleted(task: Task) {
-      task.completed = !task.completed
-    }
+  console.log('markTaskCompleted called with task', task);
+  task.completed = !task.completed;
+}
   }
 })
 </script>
