@@ -33,6 +33,7 @@
 import { defineComponent } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
+
 interface Task {
   id: string
   text: string
@@ -60,9 +61,13 @@ export default defineComponent({
       }
     },
     markTaskCompleted(task: Task) {
-  console.log('markTaskCompleted called with task', task);
-  task.completed = !task.completed;
+  this.$set(task, 'completed', !task.completed);
 }
+
   }
 })
 </script>
+
+<style>
+/* Bootstrap styles */
+</style>
