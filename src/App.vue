@@ -1,4 +1,5 @@
 <template>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
   <div class="container mt-3">
     <form @submit.prevent="add">
       <div class="input-group">
@@ -17,6 +18,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { v4 as uuidv4 } from "uuid";
 export default {
@@ -49,3 +51,6 @@ export default {
   text-decoration: line-through;
 }
 </style>
+
+
+
