@@ -1,4 +1,6 @@
 <template>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+
   <div>
     <form @submit.prevent="add">
       <input v-model="todo" />
