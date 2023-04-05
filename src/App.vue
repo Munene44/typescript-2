@@ -1,73 +1,46 @@
 <template>
-  <div class="container">
-    <h1>Todo List</h1>
-    <form @submit.prevent="addTask">
-      <div class="form-group">
-        <label for="task">Task</label>
-        <input type="text" class="form-control" id="task" v-model="newTask">
-      </div>
-      <button type="submit" class="btn btn-primary">Add Task</button>
+  <div>
+    <form @submit.prevent="add">
+      <input v-model="todo" />
+      <button type="submit">Add</button>
     </form>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Task</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(task, index) in tasks" :key="task.id">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ task.text }}</td>
-          <td>
-            <input type="checkbox" v-model="task.completed" @change="markTaskCompleted(task)">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-for="(todo, index) of todos" :key="todo.id">
+      <input type="checkbox" v-model="todo.completed" />
+      <span :class="{ 'completed': todo.completed }">{{ todo.todo }}</span>
+      <button @click="deleteTodo(index)">delete</button>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
-
-
-interface Task {
-  id: string
-  text: string
-  completed: boolean
-}
-
-export default defineComponent({
-  name: 'TodoList',
+<script>
+import { v4 as uuidv4 } from "uuid";
+export default {
+  name: "App",
   data() {
     return {
-      newTask: '',
-      tasks: [] as Task[]
-    }
+      todo: "",
+      todos: [],
+    };
   },
   methods: {
-    addTask() {
-      if (this.newTask.trim() !== '') {
-        const task: Task = {
-          id: uuidv4(),
-          text: this.newTask.trim(),
-          completed: false
-        }
-        this.tasks.push(task)
-        this.newTask = ''
-      }
+    add() {
+      const { todo } = this;
+      this.todos.push({
+        id: uuidv4(),
+        todo,
+        completed: false,
+      });
+      this.todo = "";
     },
-    markTaskCompleted(task: Task) {
-  this.$set(task, 'completed', !task.completed);
-}
-
-  }
-})
+    deleteTodo(index) {
+      this.todos.splice(index, 1);
+    },
+  },
+};
 </script>
 
 <style>
-/* Bootstrap styles */
+.completed {
+  text-decoration: line-through;
+}
 </style>
